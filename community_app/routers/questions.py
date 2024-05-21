@@ -1,11 +1,12 @@
 from flask import Blueprint
 
+
 questions_bp = Blueprint('questions', __name__, url_prefix='/questions')
 
 
-@questions_bp.route('/')
+@questions_bp.route('/', methods=['GET'])
 def get_all_questions():
-    return "GETTING ALL QUESTIONS"
+    return "WE ARE GETTING ALL QUESTIONS!"
 
 
 @questions_bp.route('/add', methods=['POST'])
