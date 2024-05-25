@@ -8,11 +8,22 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id', ondelete="CASCADE"), nullable=False)
 
     responses = db.relationship('Response', backref='question', lazy=True)
 
     def __str__(self):
         return f"Question: {self.text}"
+
+class Category(db.Model):
+    __tablename__ = 'categories'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+
+    questions = db.relationship('Question', backref='category', lazy=True)
+
+    def __str__(self):
+        return f"Category - {self.name}"
 
 
 class Statistic(db.Model):
