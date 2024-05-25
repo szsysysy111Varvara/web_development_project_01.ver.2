@@ -12,6 +12,7 @@ questions_bp = Blueprint('questions', __name__, url_prefix='/questions')
 
 @questions_bp.route('/', methods=['GET'])
 def get_all_questions():
+    return "GETTING ALL QUESTIONS"
     questions: list[Question, ...] = Question.query.all()
 
     # questions_data: list[dict] = [
@@ -36,6 +37,7 @@ def get_all_questions():
 
 @questions_bp.route('/add', methods=['POST'])
 def add_new_question():
+    return "WE ARE ADDED A NEW QUESTION"
     data = request.get_json()
 
     # if not data or 'text' not in data:
@@ -73,6 +75,7 @@ def add_new_question():
 
 @questions_bp.route('/<int:question_id>')
 def get_question_by_id(question_id):
+    return f"GETTING QUESTION BY ID - '{question_id}'"
     question: Question = Question.query.get(question_id)
 
     # if not question:
@@ -94,8 +97,9 @@ def get_question_by_id(question_id):
     return make_response(jsonify(question_data), 200)
 
 
-@questions_bp.route('/update/<int:question_id>', methods=['PUT'])  # 127.0.0.1:5000/questions/update/5
+@questions_bp.route('/update/<int:question_id>', methods=['PUT'])
 def update_question_by_pk(question_id):
+    return f"UPDATE QUESTION BY QUESTION ID - '{question_id}'"
     question: Question = Question.query.get(question_id)
 
     if not question:
@@ -129,6 +133,7 @@ def update_question_by_pk(question_id):
 
 @questions_bp.route('/delete/<int:question_id>', methods=['DELETE'])
 def delete_question_by_pk(question_id):
+    return f"DELETE QUESTION BY QUESTION ID - '{question_id}'"
     question: Question = Question.query.get(question_id)
 
     if not question:
